@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edeke Caleb Edet — Digital Marketing & Content Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #181818;
+    --accent: #e8ff47;
+    --accent2: #ff6b35;
+    --text: #f0f0f0;
+    --muted: #888;
+    --border: #222;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+    opacity: 0.5;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,255,71,0.08);
+    border: 1px solid rgba(232,255,71,0.2);
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+    opacity: 0;
+  }
+
+  .hero h1 .line-accent { color: var(--accent); }
+  .hero h1 .line-muted { color: var(--muted); font-weight: 400; font-style: italic; }
+
+  .hero-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #aaa;
+    max-width: 560px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    animation: scrollLine 2s ease infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { width: 40px; opacity: 1; }
+    50% { width: 80px; opacity: 0.5; }
+    100% { width: 40px; opacity: 1; }
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 100px 48px;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -2px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .about-text p {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--accent); }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--accent);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* SKILLS */
+  .skills { max-width: 1100px; margin: 0 auto; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { border-color: rgba(232,255,71,0.3); transform: translateY(-4px); }
+
+  .skill-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .skill-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* PORTFOLIO */
+  .portfolio {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .portfolio-inner { max-width: 1100px; margin: 0 auto; }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+  }
+
+  .portfolio-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .portfolio-card:hover {
+    border-color: rgba(232,255,71,0.3);
+    transform: translateY(-4px);
+  }
+
+  .portfolio-card-top {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-bg-1 { background: linear-gradient(135deg, #1a1a0a, #2a2a10); }
+  .card-bg-2 { background: linear-gradient(135deg, #0a1a0a, #102a10); }
+  .card-bg-3 { background: linear-gradient(135deg, #1a0a0a, #2a1010); }
+
+  .portfolio-card-body { padding: 28px; }
+
+  .portfolio-tag {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .portfolio-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .portfolio-card-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .portfolio-link {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .portfolio-link:hover { gap: 10px; }
+
+  /* CERTIFICATIONS */
+  .certs { max-width: 1100px; margin: 0 auto; }
+
+  .certs-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 32px;
+    transition: all 0.2s;
+  }
+
+  .cert-item:hover {
+    border-color: rgba(232,255,71,0.3);
+  }
+
+  .cert-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cert-icon {
+    width: 44px; height: 44px;
+    background: rgba(232,255,71,0.08);
+    border: 1px solid rgba(232,255,71,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .cert-org {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .cert-badge {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  .badge-progress {
+    background: rgba(255,107,53,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(255,107,53,0.3);
+  }
+
+  .badge-done {
+    background: rgba(232,255,71,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.3);
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .contact-title span { color: var(--accent); }
+
+  .contact-desc {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: all 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-scroll { left: 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    body { cursor: auto; }
+    .cursor, .cursor-follower { display: none; }
+    .cert-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ECE.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to Opportunities</div>
+    <h1>
+      Edeke<br>
+      <span class="line-accent">Caleb</span><br>
+      <span class="line-muted">Edet</span>
+    </h1>
+    <p class="hero-desc">
+      Digital Marketing & Content Professional. Science-trained analytical thinker applying research precision to brand strategy, content, and growth.
+    </p>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Science meets<br>strategy.</h2>
+      <p>
+        I am a <strong>Microbiology graduate</strong> from the University of Calabar who made a deliberate pivot into digital marketing — bringing with me seven years of scientific training in observation, research, testing, and measurement.
+      </p>
+      <p>
+        What makes me different is that I don't just create content — I <strong>research markets, analyse competitors, and build campaigns</strong> backed by data. My science background gives me an analytical precision that most marketing graduates simply don't have.
+      </p>
+      <p>
+        Currently building in public, learning digital marketing through Google's certification programme, and actively seeking entry-level and graduate trainee roles in <strong>Lagos, Nigeria.</strong>
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Years of academic discipline in scientific research</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Core digital marketing skill areas being developed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2+</div>
+        <div class="stat-label">Real-world portfolio projects completed independently</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Curiosity for Nigerian market analysis and brand strategy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills">
+    <div class="reveal">
+      <div class="section-label">What I Do</div>
+      <h2 class="section-title">Skills &<br>Capabilities</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔍</div>
+        <div class="skill-name">Competitor Research & Analysis</div>
+        <div class="skill-desc">Mapping competitive landscapes, identifying market gaps, and translating findings into actionable brand strategy.</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">✍️</div>
+        <div class="skill-name">Content Writing & Copywriting</div>
+        <div class="skill-desc">Creating clear, compelling content that connects brands to their target audience across digital channels.</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">SEO & Analytics</div>
+        <div class="skill-desc">Understanding search behaviour, measuring performance, and optimising content for discoverability and impact.</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📱</div>
+        <div class="skill-name">Social Media Management</div>
+        <div class="skill-desc">Building brand presence through strategic content planning, community engagement, and consistent execution.</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧬</div>
+        <div class="skill-name">Analytical Thinking</div>
+        <div class="skill-desc">Seven years of scientific training applied to marketing — observe, hypothesize, test, measure, iterate.</div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📣</div>
+        <div class="skill-name">Campaign Development</div>
+        <div class="skill-desc">Building multi-channel marketing campaigns from customer persona development through to messaging and execution.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-inner">
+    <div class="reveal">
+      <div class="section-label">My Work</div>
+      <h2 class="section-title">Portfolio</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="portfolio-card-top card-bg-1">🍔</div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tag">Competitor Analysis</div>
+          <div class="portfolio-card-title">Chowdeck — Nigeria's Food Delivery War</div>
+          <div class="portfolio-card-desc">A full competitive analysis of Chowdeck, mapping their USP, customer perception, competitive landscape, and strategic positioning in the Nigerian market.</div>
+          <a href="#" class="portfolio-link">View Analysis →</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-card-top card-bg-2">🛵</div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tag">Campaign Development</div>
+          <div class="portfolio-card-title">Edima — Calabar Chop Better Campaign</div>
+          <div class="portfolio-card-desc">A 3-phase digital marketing campaign for Edima, Calabar's only food delivery app — built from customer persona development through to full multi-channel messaging.</div>
+          <a href="#" class="portfolio-link">View Campaign →</a>
+        </div>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-card-top card-bg-3">📈</div>
+        <div class="portfolio-card-body">
+          <div class="portfolio-tag">Coming Soon</div>
+          <div class="portfolio-card-title">Nigerian Fintech Analysis</div>
+          <div class="portfolio-card-desc">An independent competitive analysis of leading Nigerian fintech brands — Moniepoint, PiggyVest, and Opay — examining their digital marketing strategies.</div>
+          <a href="#" class="portfolio-link">In Progress →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="certs">
+    <div class="reveal">
+      <div class="section-label">Credentials</div>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="certs-list">
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon">🎓</div>
+          <div>
+            <div class="cert-name">Fundamentals of Digital Marketing</div>
+            <div class="cert-org">Google Digital Garage / Google Skillshop</div>
+          </div>
+        </div>
+        <div class="cert-badge badge-progress">In Progress</div>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon">🔬</div>
+          <div>
+            <div class="cert-name">Bachelor of Science — Microbiology</div>
+            <div class="cert-org">University of Calabar, Nigeria</div>
+          </div>
+        </div>
+        <div class="cert-badge badge-done">Completed</div>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon">📋</div>
+          <div>
+            <div class="cert-name">HubSpot Content Marketing</div>
+            <div class="cert-org">HubSpot Academy</div>
+          </div>
+        </div>
+        <div class="cert-badge badge-progress">Upcoming</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label" style="justify-content:center">Get In Touch</div>
+    <h2 class="contact-title">Let's work<br><span>together.</span></h2>
+    <p class="contact-desc">
+      I am currently open to digital marketing, content, and graduate trainee opportunities in Lagos, Nigeria. If you think I'd be a good fit for your team, I'd love to hear from you.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:edeke.calebedet@gmail.com" class="contact-link">
+        ✉️ Send an Email
+      </a>
+      <a href="https://twitter.com/EdekeCaleb" target="_blank" class="contact-link">
+        𝕏 Twitter / X
+      </a>
+      <a href="https://linkedin.com/in/calebedeke" target="_blank" class="contact-link">
+        💼 LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 <span>Edeke Caleb Edet.</span> All rights reserved.</div>
+  <div>Built in public. Getting hired in private.</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('follower');
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+
+  function animateFollower() {
+    followerX += (mouseX - followerX) * 0.12;
+    followerY += (mouseY - followerY) * 0.12;
+    follower.style.left = followerX - 18 + 'px';
+    follower.style.top = followerY - 18 + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
